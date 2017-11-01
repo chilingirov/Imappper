@@ -1,12 +1,30 @@
-    var closeSideBar = function() {
-        document.getElementById("closeBar").addEventListener("click", function(e) {
-            e.preventDefault();
-            document.querySelector(".sidebar").classList.toggle("toggle-bar");
-        });
-    };
-    closeSideBar();
     var map;
     var markers = [];
+    var myLocation = {
+        lat: 33.840763,
+        lng: -118.345413
+    }
+    var id = 'JUJC3IUTWGW2ZNGTETECIJKDYPHLFANSWNS4AHU2CCWZQFXN';
+    var secret = 'CBBJUWHNQ0D4RV13I5255DVD335PSAM2I5WCQSRGJ5KHZFMC';
+    var locs = []
+    $.ajax({
+        url: "https://api.foursquare.com/v2/venues/search",
+        dataType: 'json',
+        data: 'll=' + myLocation.lat + ',' + myLocation.lng +
+            '&client_id=' + 'JUJC3IUTWGW2ZNGTETECIJKDYPHLFANSWNS4AHU2CCWZQFXN' +
+            '&client_secret=' + 'CBBJUWHNQ0D4RV13I5255DVD335PSAM2I5WCQSRGJ5KHZFMC' +
+            '&v=20171101' +
+            '&query=food' +
+            '&m=foursquare',
+        async: true,
+        success: function(data) {
+            for (var i = 0; i < data.response.venues.length; i++) {
+                locs.push({ title: data.response.venues[i].name, location: { lat: data.response.venues[i].location.lat, lng: data.response.venues[i].location.lng } })
+            }
+            initMap();
+            ko.applyBindings({ locs });
+        }
+    });
     var locations = [{
         title: "24 Hours Fitness",
         location: {
@@ -290,9 +308,9 @@
 
         var largeInfowindow = new google.maps.InfoWindow();
         var bounds = new google.maps.LatLngBounds();
-        for (var i = 0; i < locations.length; i++) {
-            var position = locations[i].location;
-            var title = locations[i].title;
+        for (var i = 0; i < locs.length; i++) {
+            var position = locs[i].location;
+            var title = locs[i].title;
             var marker = new google.maps.Marker({
                 map: map,
                 position: position,
@@ -321,4 +339,12 @@
             });
         }
     }
-    ko.applyBindings({ locations });
+
+    //Toggle sidebar menu function
+    var closeSideBar = function() {
+        document.getElementById("closeBar").addEventListener("click", function(e) {
+            e.preventDefault();
+            document.querySelector(".sidebar").classList.toggle("toggle-bar");
+        });
+    };
+    closeSideBar();

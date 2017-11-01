@@ -29,7 +29,7 @@
                 <input id="search" type="search" placeholder="search" style="width:80%;">
                 <input id="filter" type="submit" value="Filter" style="width:20%;">
             </div>
-            <div data-bind="foreach: locations">
+            <div data-bind="foreach: locs">
                 <div class="location">
                     <img src="https://www.thephotoargus.com/wp-content/uploads/2013/11/waterfall-rainbow-2.jpg">
                     <h3 data-bind="text: title">Location 1</h3>
@@ -41,13 +41,16 @@
     </div>
     </div>
 
-    <!-- <script type="text/javascript" src="map-options.js"></script> -->
-    <script type='text/javascript' src='bower_components/knockout/dist/knockout.js'></script>
-    <script type="text/javascript" src="index.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDalDAFVa69_9ijZ7l-o64sCS13QaLf10&v=3&callback=initMap"></script>
+    <!--Font awesome-->
     <script src="https://use.fontawesome.com/836fd57cc4.js"></script>
-
-
+    <!--Jquery CDN-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!--Knockout framework-->
+    <script type='text/javascript' src='bower_components/knockout/dist/knockout.js'></script>
+    <!--custom javascript file-->
+    <script type="text/javascript" src="index.js"></script>
+    <!--Google maps API-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDalDAFVa69_9ijZ7l-o64sCS13QaLf10&v=3&callback=initMap"></script>
 
 </body>
 
