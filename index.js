@@ -7,6 +7,103 @@
     closeSideBar();
     var map;
     var markers = [];
+    var locations = [{
+        title: "24 Hours Fitness",
+        location: {
+            lat: 33.791779,
+            lng: -118.332360
+        }
+    }, {
+        title: "Big 5 Sporting Goods",
+        location: {
+            lat: 33.793426,
+            lng: -118.333777
+        }
+    }, {
+        title: "Islands Restaurant",
+        location: {
+            lat: 33.792181,
+            lng: -118.330380
+        }
+    }, {
+        title: "Tilly's",
+        location: {
+            lat: 33.791987,
+            lng: -118.330823
+        }
+    }, {
+        title: "Whole Foods Market",
+        location: {
+            lat: 33.792306,
+            lng: -118.331187
+        }
+    }, {
+        title: "Mimi's Cafe",
+        location: {
+            lat: 33.793902,
+            lng: -118.331010
+        }
+    }, {
+        title: "The Coffee Bean & Tea Leaf",
+        location: {
+            lat: 33.793406,
+            lng: -118.331630
+        }
+    }, {
+        title: "Trader Joe's",
+        location: {
+            lat: 33.790641,
+            lng: -118.330191
+        }
+    }, {
+        title: "Veggie Grill",
+        location: {
+            lat: 33.791197,
+            lng: -118.328998
+        }
+    }, {
+        title: "Mercedes-Benz of South Bay",
+        location: {
+            lat: 33.801039,
+            lng: -118.343252
+        }
+    }, {
+        title: "Vons",
+        location: {
+            lat: 33.805180,
+            lng: -118.330549
+        }
+    }, {
+        title: "Del Amo Fashion Center",
+        location: {
+            lat: 33.830766,
+            lng: -118.349413
+        }
+    }, {
+        title: "SEPHORA",
+        location: {
+            lat: 33.828587,
+            lng: -118.350065
+        }
+    }, {
+        title: "Griffith Adult Center",
+        location: {
+            lat: 33.825852,
+            lng: -118.320962
+        }
+    }, {
+        title: "South Bay Galleria",
+        location: {
+            lat: 33.871275,
+            lng: -118.355042
+        }
+    }, {
+        title: "UFC GYM",
+        location: {
+            lat: 33.850804,
+            lng: -118.352378
+        }
+    }];
 
     function initMap() {
 
@@ -188,103 +285,8 @@
                 }]
             }]
         });
-        var locations = [{
-            title: "24 Hours Fitness",
-            location: {
-                lat: 33.791779,
-                lng: -118.332360
-            }
-        }, {
-            title: "Big 5 Sporting Goods",
-            location: {
-                lat: 33.793426,
-                lng: -118.333777
-            }
-        }, {
-            title: "Islands Restaurant",
-            location: {
-                lat: 33.792181,
-                lng: -118.330380
-            }
-        }, {
-            title: "Tilly's",
-            location: {
-                lat: 33.791987,
-                lng: -118.330823
-            }
-        }, {
-            title: "Whole Foods Market",
-            location: {
-                lat: 33.792306,
-                lng: -118.331187
-            }
-        }, {
-            title: "Mimi's Cafe",
-            location: {
-                lat: 33.793902,
-                lng: -118.331010
-            }
-        }, {
-            title: "The Coffee Bean & Tea Leaf",
-            location: {
-                lat: 33.793406,
-                lng: -118.331630
-            }
-        }, {
-            title: "Trader Joe's",
-            location: {
-                lat: 33.790641,
-                lng: -118.330191
-            }
-        }, {
-            title: "Veggie Grill",
-            location: {
-                lat: 33.791197,
-                lng: -118.328998
-            }
-        }, {
-            title: "Mercedes-Benz of South Bay",
-            location: {
-                lat: 33.801039,
-                lng: -118.343252
-            }
-        }, {
-            title: "Vons",
-            location: {
-                lat: 33.805180,
-                lng: -118.330549
-            }
-        }, {
-            title: "Del Amo Fashion Center",
-            location: {
-                lat: 33.830766,
-                lng: -118.349413
-            }
-        }, {
-            title: "SEPHORA",
-            location: {
-                lat: 33.828587,
-                lng: -118.350065
-            }
-        }, {
-            title: "Griffith Adult Center",
-            location: {
-                lat: 33.825852,
-                lng: -118.320962
-            }
-        }, {
-            title: "South Bay Galleria",
-            location: {
-                lat: 33.871275,
-                lng: -118.355042
-            }
-        }, {
-            title: "UFC GYM",
-            location: {
-                lat: 33.850804,
-                lng: -118.352378
-            }
-        }];
+
+
 
         var largeInfowindow = new google.maps.InfoWindow();
         var bounds = new google.maps.LatLngBounds();
@@ -319,3 +321,4 @@
             });
         }
     }
+    ko.applyBindings({ locations });
