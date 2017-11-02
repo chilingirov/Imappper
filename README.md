@@ -1,3 +1,3 @@
 # Imapper
 
-[live demo](https://chilingirov.github.io/imapper/)
+[live demo](https://chilingirov.github.io/Imappper/)
