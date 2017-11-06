@@ -29,7 +29,7 @@
                 <input id="search" type="search" placeholder="search" style="width:80%;">
                 <input id="filter" type="submit" value="Filter" style="width:20%;">
             </div>
-            <div data-bind="foreach: locations">
+            <div id="a" data-bind="foreach: locations">
                 <div class="location-body">
                     <h3 data-bind="text: title">Location 1</h3>
                     <h6 data-bind="text: address">Location 1</h6>
@@ -44,6 +44,7 @@
     <script src="https://use.fontawesome.com/836fd57cc4.js"></script>
     <!--Jquery CDN-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type='text/javascript' src="map-style.js"></script>
     <!--Knockout framework-->
     <script type='text/javascript' src='bower_components/knockout/dist/knockout.js'></script>
     <!--custom javascript file-->
