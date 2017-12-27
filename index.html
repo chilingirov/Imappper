@@ -26,12 +26,12 @@
         </div>
         <div class="sidebar">
             <div class="icons">
-                <input id="search" type="search" placeholder="search" style="width:80%;">
+                <input id="search" type="search" placeholder="search" style="width:80%;" data-bind="textInput: search, valueUpdate: 'afterkeydown'">
                 <input id="filter" type="submit" value="Filter" style="width:20%;">
             </div>
-            <div id="a" data-bind="foreach: locations">
+            <div id="a" data-bind="foreach: filterArray">
                 <div class="location-body">
-                    <h3 data-bind="text: title">Location 1</h3>
+                    <h3 data-bind="text: title, click: bounce">Location 1</h3>
                     <h6 data-bind="text: address">Location 1</h6>
                 </div>
             </div>
