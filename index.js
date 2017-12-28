@@ -4,6 +4,7 @@ var locationTorrance = {
     lat: 33.840763,
     lng: -118.345413
 }
+var infoWindow = [];
 var markers = [];
 var id = 'JUJC3IUTWGW2ZNGTETECIJKDYPHLFANSWNS4AHU2CCWZQFXN';
 var secret = 'CBBJUWHNQ0D4RV13I5255DVD335PSAM2I5WCQSRGJ5KHZFMC';
@@ -92,6 +93,16 @@ function apiRequest(lat, lng, th) {
 };
 //When you click the marker the function fill the infowindow with information from our data and add an animation to //our pins
 function populateInfowindow(that, data) {
+
+    //This code make sure that there is just one infowindow open at the same time
+    infoWindow.push(that.largeInfowindow);
+    for (var i = 0; i < infoWindow.length; i++) {
+        if (infoWindow.length > 1) {
+            infoWindow[0].close();
+            infoWindow.shift();
+        }
+    }
+
     that.htmlContent = '<h3 class="infoTitles">' + data.title + '</h3>' + '<h6 class="infoTitles">' + data.address + '</h6>';
     that.largeInfowindow.setContent(that.htmlContent);
     that.largeInfowindow.open(map, that.marker);
@@ -101,7 +112,7 @@ function populateInfowindow(that, data) {
     }, 1000);
     setTimeout(function() {
         that.largeInfowindow.close();
-    }, 1000)
+    }, 10000)
 }
 
 //Create new Venue-location and use api request to fetch data
