@@ -1,4 +1,4 @@
-# Imapper
+# Imappper
 This project is part of Udacity's Front-End 
 Developer Nanodegree. The app shows all the music locations in Los Angeles area on the map. There is an option to filter different locations and check the street view.
 
