@@ -68,6 +68,43 @@ var locations = [{
         address: "714 Santa Monica Blvd"
     }
 ];
+//Function that send request to foursquare for information about the locations
+function apiRequest(lat, lng, th) {
+    $.ajax({
+        url: "https://api.foursquare.com/v2/venues/search",
+        dataType: 'json',
+        data: 'limit=50' +
+            '&radius = 100' +
+            '&ll=' + lat + ',' + lng +
+            '&client_id=' + 'JUJC3IUTWGW2ZNGTETECIJKDYPHLFANSWNS4AHU2CCWZQFXN' +
+            '&client_secret=' + 'CBBJUWHNQ0D4RV13I5255DVD335PSAM2I5WCQSRGJ5KHZFMC' +
+            '&v=20171101' +
+            '&query=music' +
+            '&m=foursquare'
+            // async: true
+    }).done(function(data) {
+        th.id = data.response.venues[0].id;
+        th.title = data.response.venues[0].name;
+        th.address = data.response.venues[0].location.address;
+    }).fail(function() {
+        alert("There is a problem with your request!");
+    });
+};
+//When you click the marker the function fill the infowindow with information from our data and add an animation to //our pins
+function populateInfowindow(that, data) {
+    that.htmlContent = '<h3 class="infoTitles">' + data.title + '</h3>' + '<h6 class="infoTitles">' + data.address + '</h6>';
+    that.largeInfowindow.setContent(that.htmlContent);
+    that.largeInfowindow.open(map, that.marker);
+    that.marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function() {
+        that.marker.setAnimation(null);
+    }, 1000);
+    setTimeout(function() {
+        that.largeInfowindow.close();
+    }, 1000)
+}
+
+//Create new Venue-location and use api request to fetch data
 var Venue = function(data) {
     var that = this;
     this.id = data.id;
@@ -76,25 +113,8 @@ var Venue = function(data) {
     this.lng = data.location.lng;
     this.address = data.address;
     this.visible = ko.observable(true);
-    $.ajax({
-        url: "https://api.foursquare.com/v2/venues/search",
-        dataType: 'json',
-        data: 'limit=50' +
-            '&radius = 100' +
-            '&ll=' + this.lat + ',' + this.lng +
-            '&client_id=' + 'JUJC3IUTWGW2ZNGTETECIJKDYPHLFANSWNS4AHU2CCWZQFXN' +
-            '&client_secret=' + 'CBBJUWHNQ0D4RV13I5255DVD335PSAM2I5WCQSRGJ5KHZFMC' +
-            '&v=20171101' +
-            '&query=music' +
-            '&m=foursquare'
-            // async: true
-    }).done(function(data) {
-        that.id = data.response.venues[0].id;
-        that.title = data.response.venues[0].name;
-        that.address = data.response.venues[0].location.address;
-    }).fail(function() {
-        alert("There is a problem with your request!");
-    });
+    //Send request to the Foursquare API
+    apiRequest(this.lat, this.lng, that);
     this.htmlContent = '<h3>' + that.title + '</h3>' + '<h6>' + that.address + '</h6>';
     this.largeInfowindow = new google.maps.InfoWindow({ content: this.htmlContent });
     this.marker = new google.maps.Marker({
@@ -104,7 +124,9 @@ var Venue = function(data) {
         animation: google.maps.Animation.DROP,
     });
     markers.push(this.marker);
-    this.showMarker = ko.computed(function() {
+
+    //Check if the markershould be visible - if its not we pass null to the setMap() method and the marker doesn't //show up on the map
+    this.markerVisible = ko.computed(function() {
         if (this.visible() === true) {
             this.marker.setMap(map);
         } else {
@@ -112,22 +134,18 @@ var Venue = function(data) {
         }
         return true;
     }, this);
+    //Add event listener to the marker and call a function that create an infowindow
     this.marker.addListener("click", function() {
-        that.htmlContent = '<h3 class="infoTitles">' + data.title + '</h3>' + '<h6 class="infoTitles">' + data.address + '</h6>';
-        that.largeInfowindow.setContent(that.htmlContent);
-        that.largeInfowindow.open(map, this);
-        that.marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function() {
-            that.marker.setAnimation(null);
-        }, 3000);
+        populateInfowindow(that, data);
     });
     this.bounce = function(place) {
         google.maps.event.trigger(that.marker, 'click');
     };
 };
-
+//Create a viewmodel
 function ViewModel() {
-    var self = this;
+    //keep instance of this for the callback functions
+    var that = this;
     this.search = ko.observable("");
     this.locationArray = ko.observableArray([]);
     map = new google.maps.Map(document.getElementById('map'), {
@@ -141,27 +159,28 @@ function ViewModel() {
         fullscreenControl: false,
     });
     locations.forEach(function(location) {
-        self.locationArray.push(new Venue(location));
+        that.locationArray.push(new Venue(location));
     });
     this.filterArray = ko.computed(function() {
-        var filter = self.search().toLowerCase();
+        var filter = that.search().toLowerCase();
         if (!filter) {
-            self.locationArray().forEach(function(location) {
+            that.locationArray().forEach(function(location) {
                 location.visible(true);
             });
-            return self.locationArray();
+            return that.locationArray();
         } else {
-            return ko.utils.arrayFilter(self.locationArray(), function(location) {
+            return ko.utils.arrayFilter(that.locationArray(), function(location) {
                 var string = location.title.toLowerCase();
                 var result = (string.search(filter) >= 0);
                 location.visible(result);
                 return result;
             });
         }
-    }, self);
+    }, that);
 
 }
 
+//Adjust the map depends of the position of the markers
 function fitMarkers() {
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < markers.length; i++) {
@@ -170,11 +189,13 @@ function fitMarkers() {
 
     map.fitBounds(bounds);
 }
-
+//Use knockout.js for 2-way data binding
 function initMap() {
     ko.applyBindings(new ViewModel());
     fitMarkers();
 }
+
+//Add event listener for the EXPLORE button - the code toggle a class that closes and opens the sidebar
 var closeSideBar = function() {
     document.getElementById("closeBar").addEventListener("click", function(e) {
         e.preventDefault();
