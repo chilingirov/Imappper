@@ -9,9 +9,12 @@ Developer Nanodegree. The app shows all the music locations in Los Angeles area 
 
 ## installation?
 
-1. Clone the repository or download the zip file -  
+1. Clone the repository or download the zip file   
+
 `git clone https://github.com/chilingirov/Imappper`
-2. Open index.html file in your browser
+
+2. Open `index.html` file in your browser
+
 3. Enjoy!
 
 ## Live demo
