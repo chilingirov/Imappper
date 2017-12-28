@@ -7,7 +7,7 @@ Developer Nanodegree. The app shows all the music locations in Los Angeles area 
 - Foursquare API [here](https://developer.foursquare.com/)
 - KnockoutJS framework [here](http://knockoutjs.com/)
 
-## installation?
+## Installation?
 
 1. Clone the repository or download the zip file   
 
