@@ -3,7 +3,7 @@ var map;
 var locationTorrance = {
     lat: 33.840763,
     lng: -118.345413
-}
+};
 var infoWindow = [];
 var markers = [];
 var id = 'JUJC3IUTWGW2ZNGTETECIJKDYPHLFANSWNS4AHU2CCWZQFXN';
@@ -90,7 +90,7 @@ function apiRequest(lat, lng, th) {
     }).fail(function() {
         alert("There is a problem with your request!");
     });
-};
+}
 //When you click the marker the function fill the infowindow with information from our data and add an animation to //our pins
 function populateInfowindow(that, data) {
 
@@ -112,7 +112,7 @@ function populateInfowindow(that, data) {
     }, 1000);
     setTimeout(function() {
         that.largeInfowindow.close();
-    }, 10000)
+    }, 10000);
 }
 
 //Create new Venue-location and use api request to fetch data
