@@ -1,17 +1,18 @@
 # Imapper
 This project is part of Udacity's Front-End 
-Developer Nanodegree. The project uses Foursquare API to fetch data about the locations and Knockout.js framework for the two way data binding.
- - [Foursquare](https://developer.foursquare.com/)
- - [Knockout](http://knockoutjs.com/)
+Developer Nanodegree. The app shows all the music locations in Los Angeles area on the map. There is an option to filter different locations and check the street view.
 
+## Technical specifications
+- Google maps API [here](https://developers.google.com/maps/)
+- Foursquare API [here](https://developer.foursquare.com/)
+- KnockoutJS framework [here](http://knockoutjs.com/)
 
-## How to use it?
+## installation?
 
-1. First option - Clone the repository https://github.com/chilingirov/Imappper
-  git clone https://github.com/chilingirov/Imappper
+1. Clone the repository or download the zip file -  
+`git clone https://github.com/chilingirov/Imappper`
+2. Open index.html file in your browser
+3. Enjoy!
 
-2. Second option - fork the repository here in Github
-
-## Check the live demo version of the application
-
+## Live demo
 [Click me!](https://chilingirov.github.io/Imappper/)
