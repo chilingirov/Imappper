@@ -69,7 +69,7 @@ var locations = [{
     }
 ];
 var Venue = function(data) {
-    var self = this;
+    var that = this;
     this.id = data.id;
     this.title = data.title;
     this.lat = data.location.lat;
@@ -89,14 +89,14 @@ var Venue = function(data) {
             '&m=foursquare'
             // async: true
     }).done(function(data) {
-        self.id = data.response.venues[0].id;
-        self.title = data.response.venues[0].name;
-        self.address = data.response.venues[0].location.address;
+        that.id = data.response.venues[0].id;
+        that.title = data.response.venues[0].name;
+        that.address = data.response.venues[0].location.address;
     }).fail(function() {
-        alert("Houston there is a problem");
+        alert("There is a problem with your request!");
     });
-    this.htmlContent = '<h3>' + self.title + '</h3>' + '<h6>' + self.address + '</h6>';
-    this.largeInfowindow = new google.maps.InfoWindow({ content: self.htmlContent });
+    this.htmlContent = '<h3>' + that.title + '</h3>' + '<h6>' + that.address + '</h6>';
+    this.largeInfowindow = new google.maps.InfoWindow({ content: this.htmlContent });
     this.marker = new google.maps.Marker({
         map: map,
         position: data.location,
@@ -113,16 +113,16 @@ var Venue = function(data) {
         return true;
     }, this);
     this.marker.addListener("click", function() {
-        self.htmlContent = '<h3 class="infoTitles">' + data.title + '</h3>' + '<h6 class="infoTitles">' + data.address + '</h6>';
-        self.largeInfowindow.setContent(self.htmlContent);
-        self.largeInfowindow.open(map, this);
-        self.marker.setAnimation(google.maps.Animation.BOUNCE);
+        that.htmlContent = '<h3 class="infoTitles">' + data.title + '</h3>' + '<h6 class="infoTitles">' + data.address + '</h6>';
+        that.largeInfowindow.setContent(that.htmlContent);
+        that.largeInfowindow.open(map, this);
+        that.marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function() {
-            self.marker.setAnimation(null);
+            that.marker.setAnimation(null);
         }, 3000);
     });
     this.bounce = function(place) {
-        google.maps.event.trigger(self.marker, 'click');
+        google.maps.event.trigger(that.marker, 'click');
     };
 };
 
