@@ -214,3 +214,9 @@ var closeSideBar = function() {
     });
 };
 closeSideBar();
+
+
+//Handle error - if google maps can't load create div element with a message error
+function errorHandler() {
+    document.getElementById("map").innerHTML = "<div class='errorMessage'>The map could not be loaded :( </div>"
+};
