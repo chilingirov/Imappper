@@ -1,6 +1,9 @@
 # Imapper
 This project is part of Udacity's Front-End 
-Developer Nanodegree. The project uses Foursquare API to fetch data about the locations.
+Developer Nanodegree. The project uses Foursquare API to fetch data about the locations and Knockout.js framework for the two way data binding.
+ - [Foursquare](https://developer.foursquare.com/)
+ - [Knockout](http://knockoutjs.com/)
+
 
 ## How to use it?
 
